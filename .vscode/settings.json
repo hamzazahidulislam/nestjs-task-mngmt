@@ -1,12 +1,8 @@
 {
+  "window.zoomLevel": -1,
   "editor.fontLigatures": true,
   "editor.wordWrap": "on",
   "editor.minimap.enabled": false,
-  "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#FF2C70",
-    "titleBar.inactiveBackground": "#FF2C70CC"
-  },
-  "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -17,11 +13,13 @@
       }
     ]
   },
+  "workbench.colorTheme": "Dracula",
   "editor.fontFamily": "Fira Code",
   "editor.fontWeight": "500",
   "workbench.iconTheme": "material-icon-theme",
   "editor.renderIndentGuides": false,
   "php.executablePath": "C:\\xampp\\php\\php.exe",
+  "php.validate.executablePath": "C:\\xampp\\php\\php.exe",
   // config related to code formatting
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
@@ -65,12 +63,5 @@
   "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorBlinking": "expand",
   "tabnine.experimentalAutoImports": true,
-  "workbench.colorTheme": "Cobalt2",
-  "terminal.integrated.tabs.enabled": true,
-  "[jsonc]": {
-    "editor.quickSuggestions": {
-      "strings": true
-    },
-    "editor.suggest.insertMode": "replace"
-  }
+  "editor.lineHeight": 34
 }
