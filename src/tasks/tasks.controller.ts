@@ -32,7 +32,7 @@ export class TasksController {
   getTaskById(@Param('id') taskId: string): Task {
     const found = this.tasksService.getTaskById(taskId);
     if (!found) {
-      throw new NotFoundException();
+      throw new NotFoundException(`Task with ID "${taskId}" not found`); `);
     }
     return found;
   }
