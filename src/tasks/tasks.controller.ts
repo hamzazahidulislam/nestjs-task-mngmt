@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -29,7 +30,11 @@ export class TasksController {
 
   @Get('/:id')
   getTaskById(@Param('id') taskId: string): Task {
-    return this.tasksService.getTaskById(taskId);
+    const found = this.tasksService.getTaskById(taskId);
+    if (!found) {
+      throw new NotFoundException();
+    }
+    return found;
   }
 
   @Post()
