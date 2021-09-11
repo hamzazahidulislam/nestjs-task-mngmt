@@ -13,6 +13,7 @@ import {
 } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
+import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 import { Task, TaskStatus } from './tasks.model';
 import { TasksService } from './tasks.service';
 
@@ -32,7 +33,7 @@ export class TasksController {
   getTaskById(@Param('id') taskId: string): Task {
     const found = this.tasksService.getTaskById(taskId);
     if (!found) {
-      throw new NotFoundException(`Task with ID "${taskId}" not found`); `);
+      throw new NotFoundException(`Task with ID "${taskId}" not found `);
     }
     return found;
   }
@@ -45,13 +46,14 @@ export class TasksController {
 
   @Delete('/:id')
   deleteTask(@Param('id') taskId: string): void {
-    this.tasksService.deleteTask(taskId);
+    const found = this.getTaskById(taskId);
+    this.tasksService.deleteTask(found.id);
   }
 
   @Patch('/:id/status')
   updateTaskStatus(
     @Param('id') taskId: string,
-    @Body('status') status: TaskStatus,
+    @Body('status', TaskStatusValidationPipe) status: TaskStatus,
   ) {
     return this.tasksService.updateTaskStatus(taskId, status);
   }
