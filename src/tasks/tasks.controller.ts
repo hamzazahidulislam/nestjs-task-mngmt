@@ -1,10 +1,16 @@
 import {
+  Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
   ParseIntPipe,
+  Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
+import { CreateTaskDto } from './dto/create-task.dto';
 import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
 
@@ -29,17 +35,16 @@ export class TasksController {
     return found;
   }
 
-  // @Post()
-  // @UsePipes(ValidationPipe)
-  // createTask(@Body() createTaskDto: CreateTaskDto): Task {
-  //   return this.tasksService.createTask(createTaskDto);
-  // }
+  @Post()
+  @UsePipes(ValidationPipe)
+  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.tasksService.createTask(createTaskDto);
+  }
 
-  // @Delete('/:id')
-  // deleteTask(@Param('id') taskId: string): void {
-  //   const found = this.getTaskById(taskId);
-  //   this.tasksService.deleteTask(found.id);
-  // }
+  @Delete('/:id')
+  deleteTask(@Param('id', ParseIntPipe) taskId: number): Promise<void> {
+    return this.tasksService.deleteTask(taskId);
+  }
 
   // @Patch('/:id/status')
   // updateTaskStatus(

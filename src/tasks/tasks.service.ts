@@ -39,6 +39,11 @@ export class TasksService {
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
     return await this.taskRepository.createTask(createTaskDto);
   }
+
+  async deleteTask(id: number): Promise<void> {
+    const result = await this.taskRepository.delete(id);
+  }
+
   // deleteTask(taskId: string): void {
   //   this.tasks = this.tasks.filter((task) => task.id !== taskId);
   // }
