@@ -1,6 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Task } from 'src/tasks/task.entity';
+import dotenv = require('dotenv');
+
+dotenv.config({ path: './../../.env.dev' });
+console.log(process.env.DB_HOST);
 
 export const TypeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
