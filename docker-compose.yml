@@ -3,32 +3,38 @@ services:
   api-server:
     build: ./
     entrypoint: ['npm', 'run', 'start:dev']
-    # env_file: ./config/config.env
+    # env_file: ./.env.dev
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://user:password@postgres:5432/db
+      NODE_ENV: development
+      PORT: 3000
     ports:
       - 3000:3000
-      - 9229:9229
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
-  db:
-    container_name: pg_container
+  postgres:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: test_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
     ports:
       - '5432:5432'
     networks:
       app_net:
         ipv4_address: 192.168.0.2
     volumes:
-      - postgres-data:/data/db
+      - ./data/db:/var/lib/postgresql/data
   pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4
     restart: always
+    volumes:
+      - ./data/pgadmin-data:/var/lib/pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
@@ -37,8 +43,6 @@ services:
     networks:
       app_net:
         ipv4_address: 192.168.0.3
-    volumes:
-      - pg-admin-data:/data/pgadmin
 
 networks:
   app_net:
@@ -47,9 +51,3 @@ networks:
       config:
         - subnet: '192.168.0.0/24'
           gateway: 192.168.0.1
-
-volumes:
-  postgres-data:
-    driver: local
-  pg-admin-data:
-    driver: local
