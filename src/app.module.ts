@@ -3,9 +3,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
+import { AuthModule } from './auth/auth.module';
+import { User } from './auth/user.entity';
 import { Task } from './tasks/task.entity';
 import { TasksModule } from './tasks/tasks.module';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -39,7 +40,7 @@ import { AuthModule } from './auth/auth.module';
       logging:
         process.env.NODE_ENV !== 'production' &&
         process.env.NODE_ENV !== 'test',
-      entities: [Task],
+      entities: [Task, User],
     }),
     TasksModule,
     AuthModule,
