@@ -47,7 +47,19 @@ http://localhost:3000/tasks/5444c39e-83ab-4b5d-9e34-dfce1c6f5eb4
 
 # Update Status PATCH Method
 $ http://localhost:3000/tasks/0f431dab-edab-4d79-b29d-f54914bdcba1/status
+
 ```
+
+### POST /auth/signup
+
+Signup Api: http://localhost:3050/auth/signup
+
+Request body:
+
+    {
+     "username":"hamza",
+     "password":"UHU7780uudf"
+    }
 
 ## Stay in touch
 
