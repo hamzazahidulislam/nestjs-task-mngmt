@@ -49,6 +49,17 @@ services:
       - '5050:80'
     networks:
       - netjs-app
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    depends_on:
+      - api-server
+    ports:
+      - '3050:80'
+    networks:
+      - netjs-app
 
 networks:
   netjs-app:
