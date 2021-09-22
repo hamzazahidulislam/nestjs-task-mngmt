@@ -1,5 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { ConflictException } from '@nestjs/common';
+import {
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { User } from './user.entity';
@@ -15,8 +18,11 @@ export class UserRepository extends Repository<User> {
     try {
       await user.save();
     } catch (error) {
-      if(error.code === 23505){ //dublicate username
-        throw new ConflictException("Username alredy ")
+      if (error.code === '23505') {
+        //dublicate username
+        throw new ConflictException('Username alredy exists');
+      } else {
+        throw new InternalServerErrorException();
       }
     }
   }
