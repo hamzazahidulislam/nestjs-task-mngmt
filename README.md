@@ -58,7 +58,18 @@ Request body:
 
     {
      "username":"hamza",
-     "password":"UHU7780uudf"
+     "password":"your_passwod"
+    }
+
+### POST /auth/sigIn
+
+SignIn Api: http://localhost:3000/auth/signin
+
+Request body:
+
+    {
+     "username":"hamza",
+     "password":"your_password"
     }
 
 ## Stay in touch
