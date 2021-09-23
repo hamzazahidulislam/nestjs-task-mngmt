@@ -52,7 +52,7 @@ $ http://localhost:3000/tasks/0f431dab-edab-4d79-b29d-f54914bdcba1/status
 
 ### POST /auth/signup
 
-Signup Api: http://localhost:3050/auth/signup
+Signup Api: http://localhost:3000/auth/signup
 
 Request body:
 
