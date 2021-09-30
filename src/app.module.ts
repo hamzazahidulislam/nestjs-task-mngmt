@@ -4,8 +4,6 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import { AuthModule } from './auth/auth.module';
-import { User } from './auth/user.entity';
-import { Task } from './tasks/task.entity';
 import { TasksModule } from './tasks/tasks.module';
 
 @Module({
@@ -40,7 +38,7 @@ import { TasksModule } from './tasks/tasks.module';
       logging:
         process.env.NODE_ENV !== 'production' &&
         process.env.NODE_ENV !== 'test',
-      entities: [Task, User],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     TasksModule,
     AuthModule,
