@@ -1,16 +1,16 @@
 /* eslint-disable prettier/prettier */
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Task } from 'src/tasks/task.entity';
+import * as config from 'config';
 
-export const TypeOrmConfig: TypeOrmModuleOptions = {
-  type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'user',
-  password: 'password',
-  database: 'db',
-  // entities: [__dirname + '/../**/*.entity.ts'], // this is not working on Windows
-  // entities: [__dirname + '/**/*.entity{.ts,.js}'], ---> this line is working
-  entities: [Task],
-  synchronize: true, //this line not for production use
+const dbConfig = config.get('db');
+
+export const typeOrmConfig: TypeOrmModuleOptions = {
+  type: dbConfig.type,
+  host: process.env.RDS_HOSTNAME || dbConfig.host,
+  port: process.env.RDS_PORT || dbConfig.port,
+  username: process.env.RDS_USERNAME || dbConfig.username,
+  password: process.env.RDS_PASSWORD || dbConfig.password,
+  database: process.env.RDS_DB_NAME || dbConfig.database,
+  entities: [__dirname + '/../**/*.entity.ts'],
+  synchronize: process.env.TYPEORM_SYNC || dbConfig.synchronize,
 };
