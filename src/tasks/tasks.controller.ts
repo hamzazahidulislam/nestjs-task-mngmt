@@ -37,8 +37,11 @@ export class TasksController {
   }
 
   @Get('/:id')
-  getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
-    const found = this.tasksService.getTaskById(id);
+  getTaskById(
+    @Param('id', ParseIntPipe) id: number,
+    @GetUser() user: User,
+  ): Promise<Task> {
+    const found = this.tasksService.getTaskById(id, user);
     if (!found) {
       throw new NotFoundException(`Task with ID "${id}" not found `);
     }
@@ -55,15 +58,19 @@ export class TasksController {
   }
 
   @Delete('/:id')
-  deleteTask(@Param('id', ParseIntPipe) taskId: number): Promise<void> {
-    return this.tasksService.deleteTask(taskId);
+  deleteTask(
+    @Param('id', ParseIntPipe) taskId: number,
+    @GetUser() user: User,
+  ): Promise<void> {
+    return this.tasksService.deleteTask(taskId, user);
   }
 
   @Patch('/:id/status')
   updateTaskStatus(
     @Param('id', ParseIntPipe) taskId: number,
     @Body('status', TaskStatusValidationPipe) status: TaskStatus,
+    @GetUser() user: User,
   ): Promise<Task> {
-    return this.tasksService.updateTaskStatus(taskId, status);
+    return this.tasksService.updateTaskStatus(taskId, status, user);
   }
 }
