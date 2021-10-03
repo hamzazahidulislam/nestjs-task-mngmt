@@ -8,15 +8,43 @@
 		{
 			"name": "Get All Tasks",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:3000/tasks/"
+				"url": {
+					"raw": "http://localhost:3000/tasks?status=OPEN",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "OPEN"
+						}
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Create Task",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -35,24 +63,42 @@
 		{
 			"name": "Get Task By Id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:3000/tasks/5444c39e-83ab-4b5d-9e34-dfce1c6f5eb4"
+				"url": "http://localhost:3000/tasks/1"
 			},
 			"response": []
 		},
 		{
 			"name": "Delete Task",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
 				"method": "DELETE",
 				"header": [],
-				"url": "http://localhost:3000/tasks/12"
+				"url": "http://localhost:3000/tasks/2"
 			},
 			"response": []
 		},
 		{
 			"name": "Update Status",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
 				"method": "PATCH",
 				"header": [],
 				"body": {
@@ -65,7 +111,7 @@
 						}
 					]
 				},
-				"url": "http://localhost:3000/tasks/1/status"
+				"url": "http://localhost:3000/tasks/2/status"
 			},
 			"response": []
 		},
@@ -89,12 +135,23 @@
 		},
 		{
 			"name": "SingIn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"TOKEN\",pm.response.json().accessToken)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"hamza\",\r\n    \"password\":\"UHU7780uudf\"\r\n}",
+					"raw": "{\r\n    \"username\":\"hamza2\",\r\n    \"password\":\"UHU7780uudf\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
